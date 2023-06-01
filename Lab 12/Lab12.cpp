@@ -3,16 +3,19 @@
 using namespace std;
 #define V 6
 
+//function to give the return the city with minimum time
 int minTime(int times[], bool included[]) {
     int minimum = INT_MAX, min_index;
 
     for (int v = 0; v < V; v++) {
         if (included[v] == false && times[v] < minimum)
+            //to get the city with minimum time when iterating
             minimum = times[v], min_index = v;
     }
     return min_index;
 }
 
+//function to print the minimum times
 void printDist(int times[]) {
     cout << "City" << "        " << "Time" << endl;
     for (int i = 0; i < V; i++) {
@@ -21,15 +24,18 @@ void printDist(int times[]) {
 }
 
 void dijkstra(int graph[V][V], int source) {
-    int times[V];
-    bool included[V];
-
+    int times[V]; //stores the minimum times
+    bool included[V]; //stores if the city is already visited
+    
+    //to initiate everything as the maximum
     for (int i = 0; i < V; i++) {
         times[i] = INT_MAX, included[i] = false;
     }
-
+    
+    //store the time of the source as 0
     times[source] = 0;
-
+    
+    //getting the minimum times
     for (int c = 0; c < V-1; c++) {
         int u = minTime(times,included);
         // cout << u << "glam" << endl;
